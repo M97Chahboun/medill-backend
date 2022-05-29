@@ -28,6 +28,7 @@ abstract class Model {
   void get(HttpRequest request) {
     String table = routers.getModelByEndpoint(request.uri.path).objects.table;
     ResultSet select = objects.db.select("""SELECT * FROM $table""");
+    request.response.headers.contentType = ContentType.json;
     request.response.write(select.toList());
     log("[GET]-${request.uri.path}");
   }

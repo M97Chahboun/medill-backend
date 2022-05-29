@@ -1,5 +1,3 @@
-
-
 import 'package:medill/medill.dart';
 
 class Developers extends Model {

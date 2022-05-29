@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:medill/src/model.dart';
 import 'extensions.dart';
 import 'package:sqlite3/sqlite3.dart';
@@ -30,7 +32,7 @@ class MigrateDb {
         }
         if (alter.contains("ADD")) {
           db.execute(alter);
-          print("Update: " + tableName);
+          log("Update: " + tableName);
         }
       }
     });
