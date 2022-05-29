@@ -21,7 +21,7 @@ class Medill {
     print("[Start Medill Server]");
     await for (HttpRequest req in server) {
       String path = req.uri.path;
-      if (routers.routers.values.toList().contains(path) && !path.contains(".")) {
+      if (routers.routers.keys.contains(path) && !path.contains(".")) {
         Model model = routers.getModelByEndpoint(path);
         var ref = reflect(model);
         String method = req.method.toLowerCase();
