@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:sqlite3/sqlite3.dart';
 import 'extensions.dart';
@@ -21,18 +22,18 @@ abstract class Model {
 
     ResultSet select = objects.db.select("""SELECT * FROM $table""");
     request.response.write(select.toList());
-    print("[POST]");
+    log("[POST]-${request.uri.path}");
   }
 
   void get(HttpRequest request) {
     String table = routers.getModelByEndpoint(request.uri.path).objects.table;
     ResultSet select = objects.db.select("""SELECT * FROM $table""");
     request.response.write(select.toList());
-    print("[GET]");
+    log("[GET]-${request.uri.path}");
   }
 
   void put(Map data) {
-    print("helllo put$data");
+    print("put$data");
   }
 
   void del() {
@@ -55,12 +56,12 @@ abstract class Model {
 }
 
 class Objects {
-  Objects(this.table) {    
+  Objects(this.table) {
     db = sqlite3.open(settings.dbPath!);
   }
   String table;
   late Database db;
-  List get() {    
+  List get() {
     return db.select("""SELECT * FROM $table""").toList();
   }
   //TODO:implements query methods

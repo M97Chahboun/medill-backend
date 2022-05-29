@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:mirrors';
 
@@ -18,7 +19,11 @@ class Medill {
     MigrateDb().migrate();
 
     var server = await HttpServer.bind(ip, port);
-    print("[Start Medill Server]");
+    log("[Start Medill Server]");
+    log("Available routers :");
+    for (String endpoint in routers.routers.keys) {
+      log("http://localhost:$port$endpoint");
+    }
     await for (HttpRequest req in server) {
       String path = req.uri.path;
       if (routers.routers.keys.contains(path) && !path.contains(".")) {
