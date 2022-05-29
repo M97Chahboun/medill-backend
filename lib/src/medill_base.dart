@@ -31,6 +31,9 @@ class Medill {
         var ref = reflect(model);
         String method = req.method.toLowerCase();
         ref.invoke(Symbol(method), [req]);
+      } else if (path == "/") {
+        req.response.headers.contentType = ContentType.html;
+        req.response.write(htmlCode(routers.routers.keys.toList(), port));
       } else {
         req.response.write("Not found");
       }
@@ -38,4 +41,25 @@ class Medill {
       await req.response.close();
     }
   }
+}
+
+htmlCode(List endpoints, int port) {
+  String first = """
+<!DOCTYPE html>
+<html>
+<body>
+""";
+  String buttons = "";
+  for (var key in endpoints) {
+    buttons += """
+<h1>$key</h1>
+
+<a type="button" href="http://localhost:$port$key">$key</a>
+""";
+  }
+  String end = """ 
+</body>
+</html>
+""";
+  return first + buttons + end;
 }
