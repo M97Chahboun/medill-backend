@@ -19,15 +19,15 @@ class MigrateDb {
       sql += fields;
       try {
         db.execute(sql);
-      } on SqliteException catch (er) {
+      } on SqliteException {
         ResultSet table = db.select("SELECT * FROM $tableName");
         String alter = "ALTER TABLE $tableName ";
-        value.fields.forEach((e) {
+        for (var e in value.fields) {
           String gum = value.fields.last == e ? ";" : ";";
           if (!table.columnNames.contains(e['field'])) {
             alter += "ADD COLUMN ${e['field']} ${e['type']}" + gum;
           }
-        });
+        }
         if (alter.contains("ADD")) {
           db.execute(alter);
           print("Update: " + tableName);

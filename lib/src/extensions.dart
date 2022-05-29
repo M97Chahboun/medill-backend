@@ -1,9 +1,6 @@
 import 'package:medill/src/migrate.dart';
-import 'package:medill/src/routers.dart';
-import 'package:medill/src/settings.dart';
 
 import '../medill.dart';
-import 'model.dart';
 
 extension Url on Medill {
   Routers get routers => Routers();
