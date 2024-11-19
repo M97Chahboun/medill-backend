@@ -9,4 +9,5 @@ export 'src/model.dart';
 export 'src/routers.dart';
 export 'src/settings.dart';
 export 'src/types.dart';
-
+export 'src/core/routing.dart';
+export 'src/orm/model.dart';
